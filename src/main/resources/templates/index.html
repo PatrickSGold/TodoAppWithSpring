@@ -15,17 +15,19 @@
                 <th>Task ID</th>
                 <th>Task</th>
                 <th>Completed</th>
+                <th>Deadline</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="task : ${listTasks}">
-                <td th:text="${task.id}">Task ID</td>
-                <td th:text="${task.task}">Task</td>
-                <td th:text="${task.done}">Completed</td>
+        <tr th:each="todo : ${listTodos}" th:bgcolor=${todo.makeColor()}>
+                <td th:text="${todo.id}">Task ID</td>
+                <td th:text="${todo.task}">Task</td>
+                <td th:text="${todo.done}">Completed</td>
+                <td th:text="${todo.deadline}">Deadline</td>
                 <td>
-                    <a th:href="@{'/edit/' + ${task.id}}">Edit</a>
+                    <a th:href="@{'/edit/' + ${todo.id}}">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete/' + ${task.id}}">Delete</a>
+                    <a th:href="@{'/delete/' + ${todo.id}}">Delete</a>
                 </td>
             </tr>
         </tbody>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -20,10 +22,35 @@ public class TaskController {
 
     @RequestMapping("/")
     public String viewHomePage(Model model) {
-        List<Todos> listTasks = service.listAll();
-        model.addAttribute("listTasks", listTasks);
+        List<Todos> listTodos = service.listAll();
+        model.addAttribute("listTodos", listTodos);
+    //    addColor();
+   //     return "index";
+ //   }
+
+  //  private String addColor() {
+    //    String color = "#FDFEFE";
+   //      List<Todos> listTodos = service.listAll();
+    //    if(!listTodos.isEmpty()) {
+
+       //     for (int i = 0; i < listTodos.size(); i++) {
+         //       LocalDate deadlineDate = listTodos..getDeadline();
+           //     LocalDate todayDate = LocalDate.now();
+            //    Long daysBetween = Duration.between(todayDate.atStartOfDay(), deadlineDate.atStartOfDay()).toDays();
+
+             //   if (daysBetween <= 7) {
+             //       color = "#FFFF00";
+           //     } else if (daysBetween <= 1) {
+             //       color = "#FF0000";
+             //   }
+       //     }
+     //   }
+    //    model.addAttribute("color", color);
+    //    System.out.println(color);
+     //    return color;
         return "index";
-    }
+     }
+
 
     @RequestMapping("/new")
     public String showNewTaskForm(Model model) {
@@ -43,13 +70,13 @@ public class TaskController {
         ModelAndView mav = new ModelAndView("edit_task");
 
         Todos todo = service.get(id);
-        mav.addObject("Task", todo);
+        mav.addObject("Todo", todo);
 
         return mav;
     }
 
-    @RequestMapping("/delete/{Id}")
-    public String deleteTask(@PathVariable(name = "Id") int id) {
+    @RequestMapping("/delete/{id}")
+    public String deleteTask(@PathVariable(name = "id") int id) {
         service.delete(id);
 
         return "redirect:/";
