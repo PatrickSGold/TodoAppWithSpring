@@ -53,8 +53,7 @@ public class Todos {
     }
 
 
-
-    public String makeColor() {
+    public String setColor() {
         Long daysBetween =
                 Duration.between(LocalDate.now().atStartOfDay(), deadline.atStartOfDay()).toDays();
         System.out.println(daysBetween);
