@@ -1,30 +1,34 @@
 package com.example.SpringTodoApplication.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Todos {
+@Table(name = "todos")
+public class Todo {
 
-    private int id;
+    private Long id;
     private String task;
     private boolean done;
     private LocalDate deadline;  // shows the date given -1 day..
 
-    public Todos() {
+    private List<SubTask> subTasks;
+
+
+    public Todo() {
+        subTasks = new ArrayList<>();
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,11 +56,18 @@ public class Todos {
         this.deadline = deadline;
     }
 
+    @OneToMany(targetEntity = SubTask.class, mappedBy = "todo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<SubTask> getSubTasks() {
+        return subTasks;
+    }
+
+    public void setSubTasks(List<SubTask> subTasks) {
+        this.subTasks = subTasks;
+    }
 
     public String setColor() {
         Long daysBetween =
                 Duration.between(LocalDate.now().atStartOfDay(), deadline.atStartOfDay()).toDays();
-        System.out.println(daysBetween);
 
         if (daysBetween <= 1) {
             return "#FF0000";

@@ -1,28 +1,30 @@
 package com.example.SpringTodoApplication.service;
 
-import com.example.SpringTodoApplication.model.Todo;
-import com.example.SpringTodoApplication.repository.TaskRepository;
+import com.example.SpringTodoApplication.model.SubTask;
+import com.example.SpringTodoApplication.repository.SubTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+
 @Service
-public class TaskService {
+public class SubTaskService {
 
     @Autowired
-    private TaskRepository repo;
+    SubTaskRepository repo;
 
-    public List<Todo> listAll() {
+    public List<SubTask> listAll() {
+
         return repo.findAll();
     }
 
-    public void save(Todo task) {
-        repo.save(task);
+    public void save(SubTask subTask) {
+        repo.save(subTask);
     }
 
-    public Todo get(Long id) {
+    public SubTask get(Long id) {
         return repo.findById(id).get();
     }
 
@@ -30,8 +32,5 @@ public class TaskService {
         repo.deleteById(id);
     }
 
-
-
-
-
 }
+

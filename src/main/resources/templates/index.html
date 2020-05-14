@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Task Manager</title>
+    <script>
+        alert("Get ready for some awesomeness!");
+    </script>
 </head>
 <body>
 <div align="center">
     <h1>Task Manager</h1>
-    <a href="new">Add New Task</a>
+    <a href="new_task">Add New Task</a>
     <br/><br/>
     <table border="1" cellpadding="10">
         <thead>
             <tr>
                 <th>Task ID</th>
                 <th>Task</th>
-                <th>Completed</th>
                 <th>Deadline</th>
+                <th>Completed</th>
             </tr>
         </thead>
         <tbody>
         <tr th:each="todo : ${listTodos}" th:bgcolor=${todo.setColor()}>
                 <td th:text="${todo.id}">Task ID</td>
                 <td th:text="${todo.task}">Task</td>
-                <td th:text="${todo.done}">Completed</td>
                 <td th:text="${todo.deadline}">Deadline</td>
-                <td>
+                <td th:text="${todo.done}">Completed</td>
+            <td>
+                    <a th:href="@{'/subtasks/' + ${todo.id}}">Sub Tasks</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <a th:href="@{'/edit/' + ${todo.id}}">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <a th:href="@{'/delete/' + ${todo.id}}">Delete</a>
